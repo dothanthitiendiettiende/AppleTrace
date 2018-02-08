@@ -24,6 +24,9 @@
 #import "appletrace.h"
 #import "appletrace_msgsend.h"
 
+typedef void *zpointer;
+typedef unsigned long zsize;
+typedef unsigned long zaddr;
 //#define KDISABLE
 
 struct section_64 *zz_macho_get_section_64_via_name(struct mach_header_64 *header, char *sect_name);
@@ -67,7 +70,7 @@ int LOG_ALL_CLASS = 0;
     [self hook_objc_msgSend];
 }
 
-void objc_msgSend_pre_call(RegState *rs, ThreadStack *threadstack, CallStack *callstack) {
+void objc_msgSend_pre_call(RegState *rs, ThreadStack *threadstack, CallStack *callstack, const HookEntryInfo *info) {
     if(!APTIsEnable())
         return;
     char *sel_name = (char *)rs->general.regs.x1;
@@ -117,7 +120,7 @@ void objc_msgSend_pre_call(RegState *rs, ThreadStack *threadstack, CallStack *ca
     APTBeginSection(repl_name);
 }
 
-void objc_msgSend_post_call(RegState *rs, ThreadStack *threadstack, CallStack *callstack) {
+void objc_msgSend_post_call(RegState *rs, ThreadStack *threadstack, CallStack *callstack, const HookEntryInfo *info) {
     if(!APTIsEnable())
         return;
     
@@ -136,6 +139,8 @@ void objc_msgSend_post_call(RegState *rs, ThreadStack *threadstack, CallStack *c
 + (void)hook_objc_msgSend {
     ZzBuildHook((void *)objc_msgSend, NULL, NULL, objc_msgSend_pre_call, objc_msgSend_post_call,true);
     ZzEnableHook((void *)objc_msgSend);
+    
+//    ZzHookGOT("objc_msgSend",NULL,(void *)objc_msgSend, objc_msgSend_pre_call, objc_msgSend_post_call,true);
 }
 @end
 
