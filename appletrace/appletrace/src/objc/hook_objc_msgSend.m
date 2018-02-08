@@ -137,10 +137,11 @@ void objc_msgSend_post_call(RegState *rs, ThreadStack *threadstack, CallStack *c
 }
 
 + (void)hook_objc_msgSend {
-    ZzBuildHook((void *)objc_msgSend, NULL, NULL, objc_msgSend_pre_call, objc_msgSend_post_call,true);
-    ZzEnableHook((void *)objc_msgSend);
+//    // inline hook : only works under debugger
+//    ZzBuildHook((void *)objc_msgSend, NULL, NULL, objc_msgSend_pre_call, objc_msgSend_post_call,true);
+//    ZzEnableHook((void *)objc_msgSend);
     
-//    ZzHookGOT("objc_msgSend",NULL,(void *)objc_msgSend, objc_msgSend_pre_call, objc_msgSend_post_call,true);
+    ZzHookGOT("objc_msgSend",NULL,(void *)objc_msgSend, objc_msgSend_pre_call, objc_msgSend_post_call);
 }
 @end
 
