@@ -25,7 +25,7 @@
 #include <pthread.h>
 #include <objc/runtime.h>
 
-#import "fishhook.h"
+#include "fishhook.h"
 
 void* log_class_start_addr = 0;
 void* log_class_end_addr = 0;
@@ -108,7 +108,7 @@ uintptr_t apt_post_objc_msgSend() {
 
     if(record->data){
         printf("post msg send : %s\n",record->data);
-        
+
         free(record->data);
         record->data = NULL;
     }

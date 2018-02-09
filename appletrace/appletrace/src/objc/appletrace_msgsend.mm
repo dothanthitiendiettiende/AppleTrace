@@ -5,7 +5,7 @@
 //  Created by everettjf on 28/09/2017.
 //  Copyright © 2017 everettjf. All rights reserved.
 //
-
+#import <Foundation/Foundation.h>
 #include "appletrace_msgsend.h"
 #include <strings.h>
 

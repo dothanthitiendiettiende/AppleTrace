@@ -7,6 +7,7 @@
 //
 
 
+#import <Foundation/Foundation.h>
 #import "appletrace.h"
 #include <map>
 #include <vector>
