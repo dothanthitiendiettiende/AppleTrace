@@ -14,7 +14,7 @@ Let's talk in [Gitter](https://gitter.im/appletrace/AppleTrace) 或者加微信�
 ## Feature
 
 1. User-defined trace section.
-2. **[arm64 under debugger only]** Trace all Objective C methods.
+2. Trace all Objective C methods. **[arm64 only]** branch `master` only works under debugger , and branch [fishhook_only](https://github.com/everettjf/AppleTrace/tree/fishhook_only) could work without debugger (but still under testing).
 
 ## FAQ
 
