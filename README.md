@@ -107,6 +107,15 @@ Open `sampledata/trace.html` using Chrome.
 1. [catapult](https://github.com/catapult-project/catapult)
 2. *[HookZz](https://github.com/jmpews/HookZz) removed on `master` and `fishhook_only` on 2018-02-10*
 
+
+## Thanks
+
+1. catapult-project [catapult](https://github.com/catapult-project/catapult)
+2. jmpews [HookZz](https://github.com/jmpews/HookZz) 
+3. ming1016 [SMCallTraceCore](https://github.com/ming1016/GCDFetchFeed/blob/master/GCDFetchFeed/GCDFetchFeed/Lib/SMLagMonitor/SMCallTraceCore.c)
+
+
+
 ## Develop Plan
 
 1. dtrace as data source.
@@ -116,7 +125,7 @@ Open `sampledata/trace.html` using Chrome.
 ## Group
 
 1. [Gitter](https://gitter.im/appletrace/AppleTrace) 
-2. 微信群(若过期请先加微信 everettjf)
+2. 微信群 (若过期请先加微信 everettjf)(群内经常半个月没人说话，加群请认真考虑)
 
 ![wechatgroup](image/wechatgroup.png)
 
