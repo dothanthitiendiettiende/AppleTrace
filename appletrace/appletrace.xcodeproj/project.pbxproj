@@ -7,25 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CBAD2D031F7CF46200A527E5 /* appletrace_msgsend.m in Sources */ = {isa = PBXBuildFile; fileRef = CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.m */; };
+		CBAD2D031F7CF46200A527E5 /* appletrace_msgsend.c in Sources */ = {isa = PBXBuildFile; fileRef = CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.c */; };
 		CBAD2D041F7CF46200A527E5 /* appletrace_msgsend.h in Headers */ = {isa = PBXBuildFile; fileRef = CBAD2D021F7CF46200A527E5 /* appletrace_msgsend.h */; };
 		D17E99EB1F72DFC20034AAE7 /* appletrace.h in Headers */ = {isa = PBXBuildFile; fileRef = D17E998B1F72DFC20034AAE7 /* appletrace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D17E99EC1F72DFC20034AAE7 /* appletrace.mm in Sources */ = {isa = PBXBuildFile; fileRef = D17E998C1F72DFC20034AAE7 /* appletrace.mm */; };
-		D17E99ED1F72DFC20034AAE7 /* hook_objc_msgSend.m in Sources */ = {isa = PBXBuildFile; fileRef = D17E998E1F72DFC20034AAE7 /* hook_objc_msgSend.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D1BE0D661FDC55080082D362 /* libhookzz.static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D1BE0D631FDC55080082D362 /* libhookzz.static.a */; };
-		D1BE0D671FDC55080082D362 /* hookzz.h in Headers */ = {isa = PBXBuildFile; fileRef = D1BE0D641FDC55080082D362 /* hookzz.h */; };
+		D17E99ED1F72DFC20034AAE7 /* logic.m in Sources */ = {isa = PBXBuildFile; fileRef = D17E998E1F72DFC20034AAE7 /* logic.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D1891C75202DFE90001CB5DF /* apt_hooker.c in Sources */ = {isa = PBXBuildFile; fileRef = D1891C74202DFE90001CB5DF /* apt_hooker.c */; };
+		D1891C78202DFE9D001CB5DF /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = D1891C76202DFE9D001CB5DF /* fishhook.c */; };
+		D1891C79202DFE9D001CB5DF /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = D1891C77202DFE9D001CB5DF /* fishhook.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = appletrace_msgsend.m; sourceTree = "<group>"; };
+		CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = appletrace_msgsend.c; sourceTree = "<group>"; };
 		CBAD2D021F7CF46200A527E5 /* appletrace_msgsend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appletrace_msgsend.h; sourceTree = "<group>"; };
 		D17E997F1F72DF300034AAE7 /* appletrace.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = appletrace.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D17E99831F72DF300034AAE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D17E998B1F72DFC20034AAE7 /* appletrace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appletrace.h; sourceTree = "<group>"; };
 		D17E998C1F72DFC20034AAE7 /* appletrace.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = appletrace.mm; sourceTree = "<group>"; };
-		D17E998E1F72DFC20034AAE7 /* hook_objc_msgSend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = hook_objc_msgSend.m; sourceTree = "<group>"; };
-		D1BE0D631FDC55080082D362 /* libhookzz.static.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libhookzz.static.a; sourceTree = "<group>"; };
-		D1BE0D641FDC55080082D362 /* hookzz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hookzz.h; sourceTree = "<group>"; };
+		D17E998E1F72DFC20034AAE7 /* logic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = logic.m; sourceTree = "<group>"; };
+		D1891C74202DFE90001CB5DF /* apt_hooker.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = apt_hooker.c; sourceTree = "<group>"; };
+		D1891C76202DFE9D001CB5DF /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fishhook.c; sourceTree = "<group>"; };
+		D1891C77202DFE9D001CB5DF /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fishhook.h; sourceTree = "<group>"; };
+		D1891C7A202E0133001CB5DF /* apt_hooker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = apt_hooker.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,7 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1BE0D661FDC55080082D362 /* libhookzz.static.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,21 +80,15 @@
 		D17E998D1F72DFC20034AAE7 /* objc */ = {
 			isa = PBXGroup;
 			children = (
-				D1BE0D611FDC55080082D362 /* hookzz */,
 				CBAD2D021F7CF46200A527E5 /* appletrace_msgsend.h */,
-				CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.m */,
-				D17E998E1F72DFC20034AAE7 /* hook_objc_msgSend.m */,
+				CBAD2D011F7CF46200A527E5 /* appletrace_msgsend.c */,
+				D17E998E1F72DFC20034AAE7 /* logic.m */,
+				D1891C7A202E0133001CB5DF /* apt_hooker.h */,
+				D1891C74202DFE90001CB5DF /* apt_hooker.c */,
+				D1891C76202DFE9D001CB5DF /* fishhook.c */,
+				D1891C77202DFE9D001CB5DF /* fishhook.h */,
 			);
 			path = objc;
-			sourceTree = "<group>";
-		};
-		D1BE0D611FDC55080082D362 /* hookzz */ = {
-			isa = PBXGroup;
-			children = (
-				D1BE0D631FDC55080082D362 /* libhookzz.static.a */,
-				D1BE0D641FDC55080082D362 /* hookzz.h */,
-			);
-			path = hookzz;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -102,9 +98,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D1BE0D671FDC55080082D362 /* hookzz.h in Headers */,
 				D17E99EB1F72DFC20034AAE7 /* appletrace.h in Headers */,
 				CBAD2D041F7CF46200A527E5 /* appletrace_msgsend.h in Headers */,
+				D1891C79202DFE9D001CB5DF /* fishhook.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,8 +173,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CBAD2D031F7CF46200A527E5 /* appletrace_msgsend.m in Sources */,
-				D17E99ED1F72DFC20034AAE7 /* hook_objc_msgSend.m in Sources */,
+				CBAD2D031F7CF46200A527E5 /* appletrace_msgsend.c in Sources */,
+				D1891C78202DFE9D001CB5DF /* fishhook.c in Sources */,
+				D17E99ED1F72DFC20034AAE7 /* logic.m in Sources */,
+				D1891C75202DFE90001CB5DF /* apt_hooker.c in Sources */,
 				D17E99EC1F72DFC20034AAE7 /* appletrace.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

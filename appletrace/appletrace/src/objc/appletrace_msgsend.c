@@ -6,25 +6,26 @@
 //  Copyright © 2017 everettjf. All rights reserved.
 //
 
-#import "appletrace_msgsend.h"
+#include "appletrace_msgsend.h"
+#include <strings.h>
 
-static BOOL apt_s_enabled = YES;
-void APTEnable(BOOL enable){
+static int apt_s_enabled = 1;
+void APTEnable(int enable){
     apt_s_enabled = enable;
 }
-BOOL APTIsEnable(){
+int APTIsEnable(){
     return apt_s_enabled;
 }
 
-BOOL APTIsIgnoredClass(const char* name){
+int APTIsIgnoredClass(const char* name){
     if(!name)
-        return YES;
+        return 1;
     
     if(strlen(name) <=2)
-        return YES;
+        return 1;
 
     // add other filters
     
-    return NO;
+    return 0;
 }
 
