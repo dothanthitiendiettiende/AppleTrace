@@ -141,7 +141,7 @@ void objc_msgSend_post_call(RegState *rs, ThreadStack *threadstack, CallStack *c
 //    ZzBuildHook((void *)objc_msgSend, NULL, NULL, objc_msgSend_pre_call, objc_msgSend_post_call,true);
 //    ZzEnableHook((void *)objc_msgSend);
     
-    ZzHookGOT("objc_msgSend",NULL,(void *)objc_msgSend, objc_msgSend_pre_call, objc_msgSend_post_call);
+    ZzHookGOT("objc_msgSend",NULL,NULL, objc_msgSend_pre_call, objc_msgSend_post_call);
 }
 @end
 
