@@ -105,7 +105,7 @@ Open `sampledata/trace.html` using Chrome.
 ## Dependencies
 
 1. [catapult](https://github.com/catapult-project/catapult)
-2. *[HookZz](https://github.com/jmpews/HookZz) removed on `master` and `fishhook_only` on 2018-02-10*
+2. *[HookZz](https://github.com/jmpews/HookZz) removed on branch `master` and `fishhook_only` on 2018-02-10*
 
 
 ## Thanks
