@@ -14,7 +14,7 @@ Let's talk in [Gitter](https://gitter.im/appletrace/AppleTrace) 或者加微信�
 ## Feature
 
 1. User-defined trace section.
-2. Trace all Objective C methods. **[arm64 only]** branch `master` only works under debugger , and branch [fishhook_only](https://github.com/everettjf/AppleTrace/tree/fishhook_only) could work without debugger (but still under testing).
+2. Trace all Objective C methods. 
 
 ## FAQ
 
@@ -26,7 +26,7 @@ Let's talk in [Gitter](https://gitter.im/appletrace/AppleTrace) 或者加微信�
 git clone --recursive https://github.com/everettjf/AppleTrace.git
 ```
 
-For stable release , please refer to [Releases](https://github.com/everettjf/AppleTrace/releases)
+For stable release , please refer to [Releases](https://github.com/everettjf/AppleTrace/releases) or branch [stable](https://github.com/everettjf/AppleTrace/tree/stable)
 
 ## Usage
 
@@ -64,7 +64,7 @@ Sample app is `sample/ManualSectionDemo`.
 	
 (2) Dynamic library hooking all objc_msgSend.
 
-Hooking all objc_msgSend methods (based on HookZz). This only support arm64 under debugger ( lldb).
+Hooking all objc_msgSend methods . This only support arm64.
 
 Sample app is `sample/TraceAllMsgDemo`.
 
@@ -105,13 +105,12 @@ Open `sampledata/trace.html` using Chrome.
 ## Dependencies
 
 1. [catapult](https://github.com/catapult-project/catapult)
-2. [HookZz](https://github.com/jmpews/HookZz)
-
-
+2. *[HookZz](https://github.com/jmpews/HookZz) removed on `master` and `fishhook_only` on 2018-02-10*
 
 ## Develop Plan
 
 1. dtrace as data source.
+
 
 
 ## Group
