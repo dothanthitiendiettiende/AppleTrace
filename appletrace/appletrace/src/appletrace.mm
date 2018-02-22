@@ -19,6 +19,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/mman.h>
+#include "Format.h"
 
 // When appletracedata directory exists, whether delete or use another directory name (by adding sequence number)
 // 0 for delete
@@ -201,11 +202,18 @@ namespace appletrace {
                 thread_id = 0; // just make main thread id zero
             }
 
-            NSString *str = [NSString stringWithFormat:@"{\"name\":\"%s\",\"cat\":\"catname\",\"ph\":\"%s\",\"pid\":666,\"tid\":%llu,\"ts\":%llu}",
+//            NSString *str = [NSString stringWithFormat:@"{\"name\":\"%s\",\"cat\":\"catname\",\"ph\":\"%s\",\"pid\":666,\"tid\":%llu,\"ts\":%llu}",
+//                              name,ph,thread_id,elapsed
+//                              ];
+            
+            std::string str = util::Format("{\"name\":\"{0}\",\"cat\":\"catname\",\"ph\":\"{1}\",\"pid\":666,\"tid\":{2},\"ts\":{3}}",
                               name,ph,thread_id,elapsed
-                              ];
+                              );
+//            NSLog(@"%s",str.c_str());
+            
             dispatch_async(queue_, ^{
-                log_.AddLine(str.UTF8String);
+//                log_.AddLine(str.UTF8String);
+                log_.AddLine(str.c_str());
             });
         }
         void SyncWait(){
