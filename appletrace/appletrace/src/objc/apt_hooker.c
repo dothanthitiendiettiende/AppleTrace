@@ -27,6 +27,8 @@
 
 #include "fishhook.h"
 
+#include "appletrace.h"
+
 void* log_class_start_addr = 0;
 void* log_class_end_addr = 0;
 
@@ -97,7 +99,8 @@ void apt_pre_objc_msgSend(id self, SEL _cmd, uintptr_t lr) {
         repl_name = malloc(repl_len);
         snprintf(repl_name, repl_len, "[%s]%s",class_name,sel_name);
         
-        printf("pre msg send : %s\n",repl_name);
+//        printf("pre msg send : %s\n",repl_name);
+        APTBeginSection(repl_name);
     }
 
     push_call_record(self, _cmd, lr, repl_name);
@@ -107,7 +110,8 @@ uintptr_t apt_post_objc_msgSend() {
     apt_call_record *record = pop_call_record();
 
     if(record->data){
-        printf("post msg send : %s\n",record->data);
+//        printf("post msg send : %s\n",record->data);
+        APTEndSection(record->data);
 
         free(record->data);
         record->data = NULL;
