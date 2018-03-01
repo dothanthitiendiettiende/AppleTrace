@@ -11,9 +11,13 @@
 extern "C" {
 #else
 #endif
+    
+void APTBegin(const char *threadname,const char* name);
+void APTEnd(const char *threadname,const char* name);
 
 void APTBeginSection(const char* name);
 void APTEndSection(const char* name);
+
 void APTSyncWait();
 
 #if defined(__cplusplus)
@@ -22,5 +26,6 @@ void APTSyncWait();
 #endif
 
 // Objective C class method
-#define APTBegin APTBeginSection([NSString stringWithFormat:@"[%@]%@",self,NSStringFromSelector(_cmd)].UTF8String)
-#define APTEnd APTEndSection([NSString stringWithFormat:@"[%@]%@",self,NSStringFromSelector(_cmd)].UTF8String)
+//#define APTMethodBegin APTBeginSection([NSString stringWithFormat:@"[%@]%@",self,NSStringFromSelector(_cmd)].UTF8String)
+//#define APTMethodEnd APTEndSection([NSString stringWithFormat:@"[%@]%@",self,NSStringFromSelector(_cmd)].UTF8String)
+

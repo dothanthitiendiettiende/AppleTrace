@@ -166,7 +166,7 @@ namespace util
 // When appletracedata directory exists, whether delete or use another directory name (by adding sequence number)
 // 0 for delete
 // 1 for use another name
-#define kAppleTraceData_IncreaseSeqWhenExist 0
+#define kAppleTraceData_IncreaseSeqWhenExist 1
 
 namespace appletrace {
     class Logger{
@@ -313,7 +313,7 @@ namespace appletrace {
         dispatch_queue_t queue_;
         uint64_t begin_;
         mach_timebase_info_data_t timeinfo_;
-        __uint64_t main_thread_id=0;
+        __uint64_t main_thread_id_=0;
     public:
         bool Open(){
             static dispatch_once_t onceToken;
@@ -328,33 +328,39 @@ namespace appletrace {
             return true;
         }
         
+        void WriteSection(const char *thread_name,const char *name,const char *ph){
+            uint64_t time = mach_absolute_time() * timeinfo_.numer / timeinfo_.denom;
+            uint64_t elapsed = (time - begin_ )/ 1000.0;
+            
+            std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":0,\"tid\":\"<2>\",\"ts\":<3>}",
+                                           name,ph,thread_name,elapsed
+                                           );
+            
+            dispatch_async(queue_, ^{
+                log_.AddLine(str.c_str());
+            });
+        }
+        
         void WriteSection(const char *name,const char *ph){
             pthread_t thread = pthread_self();
             __uint64_t thread_id=0;
             pthread_threadid_np(thread,&thread_id);
             
-            uint64_t time = mach_absolute_time() * timeinfo_.numer / timeinfo_.denom;
-            uint64_t elapsed = (time - begin_ )/ 1000.0;
-            
-            if(main_thread_id == 0 && pthread_main_np() != 0){
-                main_thread_id = thread_id;
+            if(main_thread_id_ == 0 && pthread_main_np() != 0){
+                main_thread_id_ = thread_id;
             }
-            
-            if(main_thread_id == thread_id){
+            if(main_thread_id_ == thread_id){
                 thread_id = 0; // just make main thread id zero
             }
-
-//            NSString *str = [NSString stringWithFormat:@"{\"name\":\"%s\",\"cat\":\"catname\",\"ph\":\"%s\",\"pid\":666,\"tid\":%llu,\"ts\":%llu}",
-//                              name,ph,thread_id,elapsed
-//                              ];
             
+            uint64_t time = mach_absolute_time() * timeinfo_.numer / timeinfo_.denom;
+            uint64_t elapsed = (time - begin_ )/ 1000.0;
+
             std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":666,\"tid\":<2>,\"ts\":<3>}",
                               name,ph,thread_id,elapsed
                               );
-//            NSLog(@"%s",str.c_str());
-            
+
             dispatch_async(queue_, ^{
-//                log_.AddLine(str.UTF8String);
                 log_.AddLine(str.c_str());
             });
         }
@@ -380,6 +386,13 @@ namespace appletrace {
             }
         }
         
+        void Begin(const char *threadname,const char* name){
+            t_.WriteSection(threadname,name, "B");
+        }
+        
+        void End(const char * threadname,const char* name){
+            t_.WriteSection(threadname,name, "E");
+        }
         void BeginSection(const char* name){
             t_.WriteSection(name, "B");
         }
@@ -391,6 +404,14 @@ namespace appletrace {
             t_.SyncWait();
         }
     };
+}
+
+void APTBegin(const char *threadname,const char* name){
+    appletrace::TraceManager::Instance().Begin(threadname,name);
+}
+
+void APTEnd(const char *threadname,const char* name){
+    appletrace::TraceManager::Instance().End(threadname,name);
 }
 
 void APTBeginSection(const char* name){
