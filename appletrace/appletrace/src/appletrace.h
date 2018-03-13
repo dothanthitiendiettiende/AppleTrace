@@ -12,13 +12,19 @@ extern "C" {
 #else
 #endif
     
+#define APTLogEnableDefaultValue 1
+    
 void APTBegin(const char *threadname,const char* name);
 void APTEnd(const char *threadname,const char* name);
+    
+void APTBegin2(const char *processname,const char *threadname,const char* name);
+void APTEnd2(const char *processname,const char *threadname,const char* name);
 
 void APTBeginSection(const char* name);
 void APTEndSection(const char* name);
 
 void APTSyncWait();
+void APTLogEnable(int enable);
 
 #if defined(__cplusplus)
 }

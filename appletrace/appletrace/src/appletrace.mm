@@ -328,12 +328,16 @@ namespace appletrace {
             return true;
         }
         
-        void WriteSection(const char *thread_name,const char *name,const char *ph){
+        void WriteSection(const char * process_name,const char *thread_name,const char *name,const char *ph){
             uint64_t time = mach_absolute_time() * timeinfo_.numer / timeinfo_.denom;
             uint64_t elapsed = (time - begin_ )/ 1000.0;
             
-            std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":0,\"tid\":\"<2>\",\"ts\":<3>}",
-                                           name,ph,thread_name,elapsed
+            std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":\"<2>\",\"tid\":\"<3>\",\"ts\":<4>}",
+                                           name,
+                                           ph,
+                                           process_name,
+                                           thread_name,
+                                           elapsed
                                            );
             
             dispatch_async(queue_, ^{
@@ -356,7 +360,7 @@ namespace appletrace {
             uint64_t time = mach_absolute_time() * timeinfo_.numer / timeinfo_.denom;
             uint64_t elapsed = (time - begin_ )/ 1000.0;
 
-            std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":666,\"tid\":<2>,\"ts\":<3>}",
+            std::string str = util::Format("{\"name\":\"<0>\",\"cat\":\"catname\",\"ph\":\"<1>\",\"pid\":\"default\",\"tid\":<2>,\"ts\":<3>}",
                               name,ph,thread_id,elapsed
                               );
 
@@ -374,6 +378,7 @@ namespace appletrace {
     class TraceManager{
     private:
         Trace t_;
+        bool enable_;
     public:
         static TraceManager & Instance(){
             static TraceManager o;
@@ -381,37 +386,55 @@ namespace appletrace {
         }
         
         TraceManager(){
+            enable_ = !!APTLogEnableDefaultValue;
+            
             if(!t_.Open()){
                 NSLog(@"error open trace file");
             }
         }
         
-        void Begin(const char *threadname,const char* name){
-            t_.WriteSection(threadname,name, "B");
+        void Begin(const char * process_name,const char *threadname,const char* name){
+            if(!enable_)return;
+            t_.WriteSection(process_name,threadname,name, "B");
         }
         
-        void End(const char * threadname,const char* name){
-            t_.WriteSection(threadname,name, "E");
+        void End(const char * process_name,const char * threadname,const char* name){
+            if(!enable_)return;
+            t_.WriteSection(process_name,threadname,name, "E");
         }
         void BeginSection(const char* name){
+            if(!enable_)return;
             t_.WriteSection(name, "B");
         }
 
         void EndSection(const char* name){
+            if(!enable_)return;
             t_.WriteSection(name, "E");
         }
         void SyncWait(){
+            if(!enable_)return;
             t_.SyncWait();
+        }
+        void LogEnable(bool enable){
+            enable_ = enable;
         }
     };
 }
 
 void APTBegin(const char *threadname,const char* name){
-    appletrace::TraceManager::Instance().Begin(threadname,name);
+    appletrace::TraceManager::Instance().Begin("user",threadname,name);
 }
 
 void APTEnd(const char *threadname,const char* name){
-    appletrace::TraceManager::Instance().End(threadname,name);
+    appletrace::TraceManager::Instance().End("user",threadname,name);
+}
+
+void APTBegin2(const char *processname,const char *threadname,const char* name){
+    appletrace::TraceManager::Instance().Begin(processname,threadname,name);
+}
+
+void APTEnd2(const char *processname,const char *threadname,const char* name){
+    appletrace::TraceManager::Instance().End(processname,threadname,name);
 }
 
 void APTBeginSection(const char* name){
@@ -424,6 +447,10 @@ void APTEndSection(const char* name){
 
 void APTSyncWait(){
     appletrace::TraceManager::Instance().SyncWait();
+}
+
+void APTLogEnable(int enable){
+    appletrace::TraceManager::Instance().LogEnable(!!enable);
 }
 
 @interface APTInterface : NSObject
