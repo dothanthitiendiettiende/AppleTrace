@@ -12,7 +12,7 @@ extern "C" {
 #else
 #endif
     
-#define APTLogEnableDefaultValue 1
+#define APTLogEnableDefaultValue 0
     
 void APTBegin(const char *threadname,const char* name);
 void APTEnd(const char *threadname,const char* name);
