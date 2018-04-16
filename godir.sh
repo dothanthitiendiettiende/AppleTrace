@@ -14,5 +14,5 @@ echo $basepath
 for D in `find ${path} ! -path ${path} -type d -maxdepth 1`
 do
     echo $D
-    sh go.sh $D
+    sh ${basepath}/go.sh $D
 done
